@@ -42,6 +42,34 @@
         (into [(w/u32 counter)]
               (mapv #(w/le32 nonce (* 4 %)) (range 3)))))
 
+(defn- hchacha-state
+  "HChaCha20 initial state: constants, eight key words, four nonce words (no
+  counter). Used by XChaCha extended-nonce construction."
+  [key nonce16]
+  (into (into (vec constants)
+              (mapv #(w/le32 key (* 4 %)) (range 8)))
+        (mapv #(w/le32 nonce16 (* 4 %)) (range 4))))
+
+(defn hchacha-subkey
+  "HChaCha20(key[32], nonce16[16]) -> 32-byte subkey. Pure permutation with no
+  feedforward addition (unlike `block`)."
+  [key nonce16]
+  (let [key (vec key) nonce16 (vec nonce16)]
+    (cond
+      (not= 32 (count key)) {:status :error :reason :bad-key-length :length (count key)}
+      (not= 16 (count nonce16)) {:status :error :reason :bad-nonce-length :length (count nonce16)}
+      :else
+      (let [s (nth (iterate double-round (hchacha-state key nonce16)) 10)
+            out-idx [0 1 2 3 12 13 14 15]]
+        {:status :ok
+         :bytes (vec (mapcat (fn [i] (w/word->le (nth s i))) out-idx))}))))
+
+(defn hchacha-subkey!
+  [key nonce16]
+  (let [r (hchacha-subkey key nonce16)]
+    (if (= :ok (:status r)) (:bytes r)
+        (throw (ex-info (str "hchacha: " (name (:reason r))) r)))))
+
 (defn block
   "One 64-byte keystream block."
   [key counter nonce]

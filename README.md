@@ -21,7 +21,8 @@ than an implementation. HPKE (RFC 9180) needs one AEAD it can actually run.
 | namespace | |
 |---|---|
 | `chacha20.aead` | `seal` `open` `seal!` `open!` — RFC 8439 §2.8 |
-| `chacha20.core` | `block` `encrypt` — the cipher, §2.3–2.4 |
+| `chacha20.xchacha` | `seal` `open` `xchacha20poly1305` — XChaCha20-Poly1305 (24-byte nonce; cljs noble shim) |
+| `chacha20.core` | `block` `encrypt` `hchacha-subkey` — the cipher, §2.3–2.4 |
 | `chacha20.poly1305` | `mac` `clamp` — the one-time authenticator, §2.5 |
 | `chacha20.word` | 32-bit words, the only file that knows the runtime |
 
@@ -96,6 +97,3 @@ multiply-by-five rather than a shift and mask across a limb.
 
 **ChaCha20 with a 64-bit nonce** (the original construction, before RFC 8439
 fixed the split at 96/32). Nothing in this workspace speaks it.
-
-**XChaCha20-Poly1305.** It is HChaCha20 plus this, and adding it without a
-consumer would mean an untested code path shipped for completeness.
