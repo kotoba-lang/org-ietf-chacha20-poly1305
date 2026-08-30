@@ -1,11 +1,17 @@
 ;; No dependencies. ChaCha20 is 32-bit words and Poly1305 is arithmetic modulo
 ;; 2^130-5; the limbs are thirteen of ten bits because neither the JVM
 ;; nor ClojureScript has a type for either.
-{:paths ["src"]
+ {:paths ["src"]
  :aliases
  {:test {:extra-paths ["test"]
          :extra-deps {io.github.cognitect-labs/test-runner
-                      {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
+                      {:git/tag "v0.5.1" :git/sha "dfb30dd"}
+                      io.github.kotoba-lang/amu
+                      {:git/url "https://github.com/kotoba-lang/amu.git"
+                       :git/sha "dd943e084e8189f4b399b51fe88f1227baba5b1e"}
+                      io.github.kotoba-lang/kotoba-kir
+                      {:git/url "https://github.com/kotoba-lang/kotoba-kir.git"
+                       :git/sha "fdf407a6645d7d35af8b6fd8ffb69d948bfe2aa8"}}
          :main-opts ["-m" "cognitect.test-runner"]
          :exec-fn cognitect.test-runner.api/test}
   :cljs {:extra-paths ["test"]}
