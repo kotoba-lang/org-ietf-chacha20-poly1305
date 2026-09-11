@@ -8,7 +8,7 @@
 ;;   0 ok  1 bad-key-length  2 bad-nonce-length
 ;;
 ;; Clojure-shaped twin: `aead_params.cljk`. Parity:
-;; `test/chacha20/aead_params_kotoba_parity_test.clj`.
+;; `test/chacha20/aead_params_kotoba_parity_test.cljk`.
 
 (ns chacha20.aead-params
   (:export [key-bytes nonce-bytes err-ok err-bad-key err-bad-nonce check-params]))

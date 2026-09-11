@@ -9,7 +9,7 @@
 ;; so the intermediates stay exact here, where a number stops being an exact
 ;; integer at 2^53.
 ;;
-;;   nbb --classpath "$(clojure -A:cljs -Spath)" scripts/verify-cljs.cljs
+;;   nbb --classpath "$(clojure -A:cljs -Spath)" scripts/verify-cljs.cljk
 (ns verify-cljs
   (:require [clojure.test :as t]
             [chacha20.core-test]
