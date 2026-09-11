@@ -6,7 +6,7 @@
   BouncyCastle must never become a dependency: it is what this is CHECKED
   AGAINST, not something it builds on.
 
-      clojure -M:oracle
+      kbb -M:oracle
 
   Four RFC vectors pin four fixed inputs. What they leave untested is the
   padding arithmetic — the aad and the ciphertext are each padded to sixteen

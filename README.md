@@ -49,9 +49,9 @@ reference it is checked against.
 ## Verify
 
 ```sh
-clojure -M:test                                                        # JVM
-nbb --classpath "$(clojure -A:cljs -Spath)" scripts/verify-cljs.cljk   # ClojureScript
-clojure -M:oracle                                                      # + differential vs BouncyCastle
+kbb -M:test                                                        # JVM
+kbb --backend sci --classpath "$(kbb -A:cljs -Spath)" scripts/verify-cljs.cljk   # ClojureScript
+kbb -M:oracle                                                      # + differential vs BouncyCastle
 ```
 
 RFC 8439 §2.3.2, §2.4.2, §2.5.2 and §2.8.2 verbatim, every single-bit flip in
