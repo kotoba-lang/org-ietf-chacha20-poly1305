@@ -1,4 +1,4 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; Run the suite on the ClojureScript side.
 ;;
 ;; Not a formality. ChaCha20 is 32-bit unsigned words, and JavaScript's
@@ -9,7 +9,7 @@
 ;; so the intermediates stay exact here, where a number stops being an exact
 ;; integer at 2^53.
 ;;
-;;   nbb --classpath "$(clojure -A:cljs -Spath)" scripts/verify-cljs.cljk
+;;   kbb --backend sci --classpath "$(kbb -A:cljs -Spath)" scripts/verify-cljs.cljk
 (ns verify-cljs
   (:require [clojure.test :as t]
             [chacha20.core-test]
