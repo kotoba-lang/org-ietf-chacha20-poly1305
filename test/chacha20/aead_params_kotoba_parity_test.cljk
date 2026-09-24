@@ -1,5 +1,5 @@
 (ns chacha20.aead-params-kotoba-parity-test
-  (:require [clojure.java.io :as io]
+  (:require [kotoba.io :as io]
             [kotoba.test :refer [deftest is testing]]
             [kotoba.compiler.core :as compiler]
             [kotoba.kir :as ir]
@@ -12,8 +12,8 @@
   (io/file (System/getProperty "user.dir") "kotoba/chacha20/aead_params.cljk"))
 
 (defn- source-available? []
-  (let [kotoba? (.exists kotoba-file)
-        cljk? (.exists cljk-file)]
+  (let [kotoba? (io/exists? kotoba-file)
+        cljk? (io/exists? cljk-file)]
     (is kotoba? (str "kotoba object not found at " kotoba-file))
     (is cljk? (str "cljk object not found at " cljk-file))
     (and kotoba? cljk?)))
