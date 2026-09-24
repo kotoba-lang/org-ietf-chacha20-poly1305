@@ -13,7 +13,7 @@
   bytes before the tag is computed, and the two lengths go in as 64-bit
   values, so a length that is a multiple of sixteen and one that is not take
   different paths. The spread below crosses that boundary in both fields."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [chacha20.aead :as a]
             [chacha20.poly1305 :as poly])
   (:import (org.bouncycastle.crypto.modes ChaCha20Poly1305)
