@@ -1,5 +1,5 @@
 (ns chacha20.xchacha-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [chacha20.aead :as a]
             [chacha20.core :as c]
             [chacha20.xchacha :as x]))

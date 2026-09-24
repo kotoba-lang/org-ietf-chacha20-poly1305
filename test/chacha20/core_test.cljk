@@ -1,7 +1,7 @@
 (ns chacha20.core-test
   "Vectors are RFC 8439 verbatim, and every one was reproduced with
   BouncyCastle 1.78.1 before this implementation was written."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [chacha20.aead :as a]
             [chacha20.core :as c]
             [chacha20.poly1305 :as poly]))
