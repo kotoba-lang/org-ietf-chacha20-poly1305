@@ -34,7 +34,7 @@
   bytes rather than short-circuiting, which is the shape a constant-time
   comparison needs, but timing is a property of machine code and no portable
   Clojure can promise what two JITs emit."
-  (:require [chacha20.core :as c]
+  (:require [kotoba.bytes :as kbytes] [chacha20.core :as c]
             [chacha20.poly1305 :as poly]
             [chacha20.word :as w]))
 
@@ -130,5 +130,5 @@
   which gives code points on the JVM and a vector of zeros under
   ClojureScript."
   [s]
-  #?(:clj (mapv #(bit-and % 0xFF) (.getBytes ^String s "UTF-8"))
+  #?(:clj (mapv #(bit-and % 0xFF) (kbytes/utf8-bytes ^String s))
      :cljs (vec (array-seq (.encode (js/TextEncoder.) s)))))
